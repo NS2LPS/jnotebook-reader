@@ -18,7 +18,7 @@
             <tbody>
                 {% for file in month["files"] %}
                 <tr>
-                    <td><a href="{{ root }}/{{ id }}/{{ file['date_path'] }}/"></a>{{ file["date"] }}</td>
+                    <td><a href="{{ root }}/{{ id }}/{{ file['date_path'] }}/">{{ file["date"] }}</a></td>
                     <td><a href="{{ root }}/{{ id }}/{{ file['path'] }}">{{ file["name"] }}</a></td>
                 </tr>
                 {% endfor %}
