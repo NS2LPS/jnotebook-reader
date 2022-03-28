@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="masthead">
-    <a class="navbar-brand" href="javascript:void(0)" style="font-size: 28px;color: #666;font-weight: bold;padding: 0">jnotebook-reader</a>
+    <a class="navbar-brand" href="javascript:void(0)" style="font-size: 28px;color: #666;font-weight: bold;padding: 0">jTopolux Data Folder</a>
     <div class="navbar-collapse collapse">
         <div class="navbar-nav mr-auto"></div>
         {% if body %}
@@ -50,10 +50,4 @@
         <li class="breadcrumb-item active">{{ items[items|length - 1] }}</li>
         {% endif %}
     </ol>
-    {% if prefix|length != 0 %}
-    {% set items = prefix.split("/") %}
-    <div style="text-align: left;margin-left: 20px;margin-bottom: 10px">
-        <a href="{{ root }}/{{ id }}/yearindex/{{ items[0] }}" class="btn btn-outline-primary">View Year Index</a>
-    </div>   
-    {% endif %} 
 </nav>
