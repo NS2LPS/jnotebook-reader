@@ -128,6 +128,7 @@ class LocalRenderer(Renderer):
 
     def render_year(self, id, year):
         content = []
+        print(join(self.__base(id), year))
         for entry in scandir(join(self.__base(id), year)):
             if not entry.name.startswith('.') and entry.is_dir() and entry.name.count('_')==2:
                 month = entry.name.split('_')[1]
