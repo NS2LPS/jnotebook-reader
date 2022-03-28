@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    {% for month in contents %}
+    <h3>{{ month["name"] }}</h3>
+    <div style="margin: 0 40px;">
+        <table class="table">
+            <tbody>
+                {% for file in month["files"] %}
+                <tr>
+                    <td>{{ file["date"] }}</td>
+                    <td><a href="{{ root }}/{{ id }}/{{ file['path'] }}">{{ file["name"] }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</body>
+</html>

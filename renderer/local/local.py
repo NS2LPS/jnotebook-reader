@@ -14,8 +14,8 @@
 
 from common.renderer import Renderer
 from common.const import const
-from os.path import join, isdir, getmtime, getsize, exists
-from os import listdir
+from os.path import join, isdir, getmtime, getsize, exists, walk
+from os import scandir
 import typing
 from datetime import datetime
 import hashlib
@@ -24,6 +24,7 @@ from lib.utils import format_date, format_size
 from flask import request
 from flask_api import status
 import os
+import calendar
 
 
 class LocalRenderer(Renderer):
@@ -59,14 +60,13 @@ class LocalRenderer(Renderer):
 
     def __list(self, path):
         result = []
-        for file in listdir(path):
-            if file.startswith('.'):
+        for entry in scandir(path):
+            if entry.startswith('.'):
                 continue
-            fp = join(path, file)
-            if isdir(fp):
+            if entry.is_dir():
                 result.append(
                     {
-                        "name": file,
+                        "name": entry.name,
                         "size": 0,
                         "rawSize": 0,
                         "lastModified": "-",
@@ -74,16 +74,17 @@ class LocalRenderer(Renderer):
                     }
                 )
             else:
-                if file.endswith(('.ipynb','.py','.md','.jpeg','.jpg','.png','.gif','.html')):
+                if entry.endswith(('.ipynb','.py','.md','.jpeg','.jpg','.png','.gif','.html')):
                     result.append(
                         {
-                            "name": file,
-                            "size": format_size(getsize(fp)),
-                            "rawSize": getsize(fp),
-                            "lastModified": format_date(self.__last_modified(fp)),
+                            "name": entry.name,
+                            "size": format_size(getsize(entry.path)),
+                            "rawSize": getsize(entry.path),
+                            "lastModified": format_date(self.__last_modified(entry.path)),
                             "type": "File",
                         }
                     )
+        result.sort(key=lambda item: item['name'])
         return result
 
     def __last_modified(self, file):
@@ -124,6 +125,24 @@ class LocalRenderer(Renderer):
             "etag": self.__etag(file),
             "lastModified": last_modified,
         }
+
+    def render_year(self, id, year):
+        content = []
+        for entry in scandir(join(self.__base(id), year)):
+            if not entry.name.startswith('.') and entry.is_dir() and entry.name.count('_')==2:
+                month = entry.name.split('_')[1]
+                month_files = []
+                for file in scandir(entry.path):
+                    if file.is_file() and file.endswith('.ipynb'):
+                        month_files.append({'date':entry.name.replace('_','-'), 
+                        'name':file.name, 
+                        'path':file.path  })
+                if month_files:
+                    month_files.sort(key=lambda item: (item['date'], item['name']))
+                    content.append({'number': month, 'name':calendar.month_name[month], 'files':month_files})
+        content.sort(key=lambda item : item['number'])
+        return content
+        
 
     def render_download(self, id, prefix):
         file = join(self.__base(id), prefix)

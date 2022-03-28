@@ -53,6 +53,23 @@ def root(id):
             status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
 
+@api.route("/<id>/yearindex/<year>")
+def yearindex(id, year):
+    try:
+        return render_template(
+            const.YEAR_TEMPLATE,
+            contents=renderer.render_year(id, year),
+            prefix="",
+            id=id,
+            root=__root(),
+        )
+    except Exception as e:
+        log.error(e)
+        return (
+            render_template(const.ERROR_TEMPLATE, root=__root()),
+            status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
+
 
 # List files of sub directories
 # Render file view

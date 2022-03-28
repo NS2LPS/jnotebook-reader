@@ -50,6 +50,7 @@ const.NOT_FOUND_TEMPLATE = "404.html"
 const.HTML_TEMPLATE = "html.html"
 const.MARKDOWN_TEMPLATE = "md.html"
 const.PYTHON_TEMPLATE = "py.html"
+const.YEAR_TEMPLATE = "year.html"
 
 
 # http header
