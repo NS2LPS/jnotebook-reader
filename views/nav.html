@@ -48,6 +48,9 @@
         {% endif %}
         {% endfor %}
         <li class="breadcrumb-item active">{{ items[items|length - 1] }}</li>
+        <div style="text-align: right;margin-right: 20px;margin-bottom: 10px">
+            <a href="{{ root }}/{{ id }}/yearindex/{{ items[0] }}" class="btn btn-outline-primary">View Year Index</a>
+        </div>    
         {% endif %}
     </ol>
 </nav>
