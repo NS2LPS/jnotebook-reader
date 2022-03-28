@@ -14,7 +14,7 @@
 
 from common.renderer import Renderer
 from common.const import const
-from os.path import join, isdir, getmtime, getsize, exists, walk
+from os.path import join, getmtime, getsize, exists
 from os import scandir
 import typing
 from datetime import datetime
