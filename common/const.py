@@ -38,6 +38,7 @@ const.PNG_TYPE = "png"
 const.GIF_TYPE = "gif"
 const.IMAGE_TYPE = [const.JPG_TYPE, const.JPEG_TYPE, const.PNG_TYPE, const.GIF_TYPE]
 const.MARKDOWN_TYPE = "md"
+const.PYTHON_TYPE = "py"
 
 # render template def
 const.ERROR_TEMPLATE = "error.html"
