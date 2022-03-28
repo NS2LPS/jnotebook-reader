@@ -59,7 +59,7 @@ def yearindex(id, year):
         return render_template(
             const.YEAR_TEMPLATE,
             contents=renderer.render_year(id, year),
-            prefix="",
+            prefix= f"/{year}",
             id=id,
             root=__root(),
         )
@@ -75,6 +75,7 @@ def yearindex(id, year):
 # Render file view
 @api.route("/<id>/<path:prefix>")
 def render(id, prefix):
+    print(prefix)
     render_context = {"prefix": prefix, "id": id, "root": __root()}
     try:
         # Directory
