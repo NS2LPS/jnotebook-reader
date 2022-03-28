@@ -134,9 +134,10 @@ class LocalRenderer(Renderer):
                 month_files = months[month]
                 for file in scandir(entry.path):
                     if file.is_file() and file.name.endswith('.ipynb'):
-                        month_files.append({'date':entry.name.replace('_','-'), 
+                        month_files.append({'date':entry.name.replace('_','-'),
+                        'date_path': join(year, entry.name),
                         'name':file.name, 
-                        'path': join(self.__base(id), year, entry.name, file.name) })
+                        'path': join(year, entry.name, file.name) })
         content = [ {'number':m, 'name':calendar.month_name[m], 'files':files } for m,files in months.items() if files]
         for c in content:
             c['files'].sort(key=lambda item: (item['date'],item['name']))
