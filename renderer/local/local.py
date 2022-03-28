@@ -74,7 +74,7 @@ class LocalRenderer(Renderer):
                     }
                 )
             else:
-                if entry.endswith(('.ipynb','.py','.md','.jpeg','.jpg','.png','.gif','.html')):
+                if entry.name.endswith(('.ipynb','.py','.md','.jpeg','.jpg','.png','.gif','.html')):
                     result.append(
                         {
                             "name": entry.name,
@@ -134,7 +134,7 @@ class LocalRenderer(Renderer):
                 month = entry.name.split('_')[1]
                 month_files = []
                 for file in scandir(entry.path):
-                    if file.is_file() and file.endswith('.ipynb'):
+                    if file.is_file() and file.name.endswith('.ipynb'):
                         month_files.append({'date':entry.name.replace('_','-'), 
                         'name':file.name, 
                         'path':file.path  })
