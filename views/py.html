@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    {% include 'head.html' %}
+    <style>
+      body { height: 100%; padding: 0; margin: 0; }
+      div.box {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+      div.header {height: 154px; width: 100%;}
+      div.content {flex: 1;margin: 0 40px;border: none; }
+    </style>
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+    <div class="box">
+      <div class="header">
+        {% include 'nav.html' %}
+      </div>
+      <div style="text-align: right;margin-right: 20px;margin-bottom: 10px">
+        <a href="{{ root }}/{{ id }}/download/{{ prefix }}" class="btn btn-outline-primary">Download</a>
+      </div>
+      <div class="content">
+        <pre><code class="python">{{ content | safe }}</code></pre>
+      </div>
+    </div>
+</body>
+</html>

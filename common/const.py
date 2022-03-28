@@ -48,6 +48,8 @@ const.LIST_TEMPLATE = "list.html"
 const.NOT_FOUND_TEMPLATE = "404.html"
 const.HTML_TEMPLATE = "html.html"
 const.MARKDOWN_TEMPLATE = "md.html"
+const.PYTHON_TEMPLATE = "py.html"
+
 
 # http header
 const.ETAG_HEADER = "Etag"

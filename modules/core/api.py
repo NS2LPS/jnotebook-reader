@@ -97,6 +97,10 @@ def render(id, prefix):
         elif const.MARKDOWN_TYPE == file_type:
             render_context["content"] = file_info["content"]
             template = const.MARKDOWN_TEMPLATE
+        # Python
+        elif const.PYTHON_TYPE == file_type:
+            render_context["content"] = file_info["content"]
+            template = const.PYTHON_TEMPLATE
         # Raw
         else:
             render_context["url"] = "{}/{}/download/{}".format(__root(), id, prefix)

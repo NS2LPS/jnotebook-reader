@@ -60,6 +60,8 @@ class LocalRenderer(Renderer):
     def __list(self, path):
         result = []
         for file in listdir(path):
+            if file.startswith('.'):
+                continue
             fp = join(path, file)
             if isdir(fp):
                 result.append(
@@ -72,15 +74,16 @@ class LocalRenderer(Renderer):
                     }
                 )
             else:
-                result.append(
-                    {
-                        "name": file,
-                        "size": format_size(getsize(fp)),
-                        "rawSize": getsize(fp),
-                        "lastModified": format_date(self.__last_modified(fp)),
-                        "type": "File",
-                    }
-                )
+                if file.endswith(('.ipynb','.py','.md','.jpeg','.jpg','.png','.gif','.html')):
+                    result.append(
+                        {
+                            "name": file,
+                            "size": format_size(getsize(fp)),
+                            "rawSize": getsize(fp),
+                            "lastModified": format_date(self.__last_modified(fp)),
+                            "type": "File",
+                        }
+                    )
         return result
 
     def __last_modified(self, file):
