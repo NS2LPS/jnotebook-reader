@@ -61,7 +61,7 @@ class LocalRenderer(Renderer):
     def __list(self, path):
         result = []
         for entry in scandir(path):
-            if entry.startswith('.'):
+            if entry.name.startswith('.'):
                 continue
             if entry.is_dir():
                 result.append(
