@@ -131,7 +131,7 @@ class LocalRenderer(Renderer):
         print(join(self.__base(id), year))
         for entry in scandir(join(self.__base(id), year)):
             if not entry.name.startswith('.') and entry.is_dir() and entry.name.count('_')==2:
-                month = entry.name.split('_')[1]
+                month = int(entry.name.split('_')[1])
                 month_files = []
                 for file in scandir(entry.path):
                     if file.is_file() and file.name.endswith('.ipynb'):
@@ -142,6 +142,7 @@ class LocalRenderer(Renderer):
                     month_files.sort(key=lambda item: (item['date'], item['name']))
                     content.append({'number': month, 'name':calendar.month_name[month], 'files':month_files})
         content.sort(key=lambda item : item['number'])
+        print(content)
         return content
         
 
