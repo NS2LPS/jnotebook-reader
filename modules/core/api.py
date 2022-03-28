@@ -99,7 +99,7 @@ def render(id, prefix):
             template = const.MARKDOWN_TEMPLATE
         # Python
         elif const.PYTHON_TYPE == file_type:
-            render_context["content"] = file_info["content"]
+            render_context["content"] = str(file_info["content"], encoding="UTF-8")
             template = const.PYTHON_TEMPLATE
         # Raw
         else:
