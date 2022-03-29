@@ -53,6 +53,7 @@ for year in os.scandir(__base(id)):
                         if file.stat().st_mtime != mtime:
                             entry['tags'] =  get_tags(file.path)
                             entry['mtime']= file.stat().st_mtime
+                            print(entry)
 
 with open('tag_parser_db.json','w') as f:
     json.dump(dbmain,f)
