@@ -1,9 +1,12 @@
+#!/home/ns2-manip/miniconda3/envs/jnotebook-reader/bin/python
+# -*- coding: utf-8 -*-
+
 import ijson
 import json
 import os
 import typing
 
-from lib import config
+from lib.config import config
 
 def __directory(id):
     directories = config["storage"]["directories"]
