@@ -50,7 +50,7 @@ for year in os.scandir(__base(id)):
                             entry = dict()
                             db[file.path] = entry
                             mtime = 0.
-                        if file.stat.st_mtime != mtime:
+                        if file.stat().st_mtime != mtime:
                             entry['tags'] =  get_tags(file.name)
                             entry['mtime']= file.stat.st_mtime
 
