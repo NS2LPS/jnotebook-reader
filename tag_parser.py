@@ -27,7 +27,7 @@ def __base(id):
 def get_tags(fname):
     with open(fname,'r') as f:
         tags = ijson.items(f, 'cells.item.metadata.tags')
-        return [x for x in tags]
+        return [x for x in tags if x]
 
 try:
     with open('tag_parser_db.json','r') as f:
@@ -38,7 +38,11 @@ except:
 id = 0
 for year in os.scandir(__base(id)):
     if year.is_dir() and year.name.isdecimal():
-        db = dbmain.get(year.name, dict())
+        if year.name in dbmain:
+            db = dbmain[year.name]
+        else:
+            db = dict()
+            dbmain[year.name] = db
         for entry in os.scandir(year.path):
             if not entry.name.startswith('.') and entry.is_dir() and entry.name.count('_')==2:
                 for file in os.scandir(entry.path):
@@ -53,7 +57,6 @@ for year in os.scandir(__base(id)):
                         if file.stat().st_mtime > mtime:
                             entry['tags'] =  get_tags(file.path)
                             entry['mtime']= int(file.stat().st_mtime)
-                            print(entry)
 
 with open('tag_parser_db.json','w') as f:
     json.dump(dbmain,f)
