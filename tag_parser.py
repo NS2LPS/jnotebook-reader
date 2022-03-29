@@ -59,7 +59,7 @@ for year in os.scandir(__base(id)):
                             entry = dict()
                             db[file.path] = entry
                             mtime = 0
-                        if file.stat().st_mtime > mtime:
+                        if file.stat().st_mtime > mtime+1:
                             files_modified += 1
                             entry['tags'] =  get_tags(file.path)
                             entry['mtime']= int(file.stat().st_mtime)
