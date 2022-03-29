@@ -5,6 +5,7 @@ import ijson
 import json
 import os
 import typing
+import time
 
 from lib.config import config
 
@@ -36,6 +37,9 @@ except:
     dbmain = dict()
 
 id = 0
+tstart = time.time()
+files_total = 0
+files_modified = 0
 for year in os.scandir(__base(id)):
     if year.is_dir() and year.name.isdecimal():
         if year.name in dbmain:
@@ -47,6 +51,7 @@ for year in os.scandir(__base(id)):
             if not entry.name.startswith('.') and entry.is_dir() and entry.name.count('_')==2:
                 for file in os.scandir(entry.path):
                     if file.is_file() and file.name.endswith('.ipynb'):
+                        files_total += 1
                         if file.path in db:
                             entry = db[file.path]
                             mtime = entry['mtime']
@@ -55,10 +60,12 @@ for year in os.scandir(__base(id)):
                             db[file.path] = entry
                             mtime = 0
                         if file.stat().st_mtime > mtime:
+                            files_modified += 1
                             entry['tags'] =  get_tags(file.path)
                             entry['mtime']= int(file.stat().st_mtime)
 
 with open('tag_parser_db.json','w') as f:
     json.dump(dbmain,f)
 
-
+print(files_total,'files parsed in',int(time.time()-tstart),'s.')
+print('Found',files_modified,'modified files.')
