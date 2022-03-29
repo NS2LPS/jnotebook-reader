@@ -27,7 +27,7 @@ def __base(id):
 def get_tags(fname):
     with open(fname,'r') as f:
         tags = ijson.items(f, 'cells.item.metadata.tags')
-    return [x for x in tags]
+        return [x for x in tags]
 
 try:
     with open('tag_parser_db.json','r') as f:
