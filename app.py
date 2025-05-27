@@ -1,3 +1,5 @@
+#!/home/ns2-manip/miniconda3/envs/jnotebook_reader/bin/python
+
 # Copyright 2020 LINE Corporation
 #
 # LINE Corporation licenses this file to you under the Apache License,

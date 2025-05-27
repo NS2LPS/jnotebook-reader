@@ -7,3 +7,6 @@ markdown2==2.3.10
 boto3==1.16.6
 nbformat==5.0.8
 botocore==1.19.6
+werkzeug==1.0.1 
+jinja2==2.11.3 
+markupsafe==2.0.1 
